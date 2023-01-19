@@ -9,6 +9,7 @@ import { getUserHelper } from "../../services/UserServices";
 import { getJwt } from "../../services/AuthServices";
 import jwtDecode from "jwt-decode";
 import { follow } from "../../services/SocialServices";
+import { profilePicStyleSmall } from "../../styles/DetailStyles";
 
 interface UserHeaderProps {
     user_id: ObjectId
@@ -67,7 +68,7 @@ const UserHeader = ({user_id} : UserHeaderProps) => {
         <div className="d-flex justify-content-between">
             <Link to={`/profile/${user._id}`} className="text-decoration-none text-dark" onClick={handleProfile}>  
                 <div className="d-flex">
-                    <img src={user.pic} />
+                    <img className="mt-1" src={user.pic} style={profilePicStyleSmall}/>
                     <div className="ms-4">
                         <div className="d-flex">
                             <div className="" style={{fontSize: 28}}>{user.username}</div> <div style={{fontSize: 15}} className="ms-2 mt-2 text-secondary">@{user.handle}</div>
