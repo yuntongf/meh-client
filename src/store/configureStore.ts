@@ -87,9 +87,9 @@ export interface IPost extends IComment{
     comments: IComment[],
     tags: string[],
     likes: number,
-    saved: number,
     remehs: number,
-    time: Date
+    time: Date,
+    saved: number
 }
 
 export interface ICart {
@@ -131,7 +131,7 @@ export interface RootState {
         hideSearchBar: boolean,
         onContentPage: boolean,
         onCheckoutPage: boolean,
-        meh: boolean,
+        modalOpen: boolean,
         messaging: boolean,
         messageTo: ObjectId
     },

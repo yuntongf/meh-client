@@ -1,7 +1,6 @@
 import { TypedUseSelectorHook, useSelector, useDispatch} from 'react-redux';
 import { navButtonOn, navButtonOff } from '../../styles/NavStyles';
 import { Link, useNavigate } from "react-router-dom";
-import { checkOutPageSet, frontPageReturned } from '../../store/reducers/nav';
 import { AppDispatch } from '../../store/configureStore';
 import { RootState } from '../../store/configureStore';
 import { logout } from '../../services/AuthServices';
@@ -16,10 +15,6 @@ const StateControl = () => {
     const user = useSelector((store : RootState) => store.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const handleBack = () => {
-        dispatch(checkOutPageSet(false));
-    }
 
     const handleLogOut = () => {
         logout();
@@ -50,8 +45,7 @@ const StateControl = () => {
             {onCheckoutPage &&
                 <Link to='/'>
                     <button style={navButtonOn} 
-                            className='m-2 btn btn-outline-secondary'
-                            onClick={handleBack}> 
+                            className='m-2 btn btn-outline-secondary'>
                         Back
                     </button>
                 </Link>}

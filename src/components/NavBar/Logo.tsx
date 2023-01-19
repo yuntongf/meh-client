@@ -1,19 +1,14 @@
 import { Link } from "react-router-dom";
-import { checkOutPageSet, frontPageReturned } from '../../store/reducers/nav';
 import { useDispatch} from 'react-redux';
+import { getJwt } from "../../services/AuthServices";
 
 const Logo = () => {
-    const dispatch = useDispatch();
     const logo = "Meh";
-
-    const returnToFrontPage = () => {
-        dispatch(frontPageReturned(null));
-        dispatch(checkOutPageSet(false));
-    }
+    const redirectUrl = getJwt() ? '/home' : '/login';
 
     return (
-        <Link to="/home">
-            <label onClick={returnToFrontPage}>
+        <Link to={redirectUrl}>
+            <label>
                 <h2 className="m-2">
                     {logo} 
                 </h2>

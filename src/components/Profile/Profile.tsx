@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPosts } from '../../store/reducers/courses';
+import { loadPosts } from '../../store/reducers/posts';
 import { userLoggedIn } from '../../store/reducers/auth';
 import SideUserHeader from '../Author/SideUserHeader';
 import Posts from '../SearchResult/Posts';
 import { toastSuccess } from '../../services/NotificationServices';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ObjectId } from 'bson';
-import { edit, getUser } from '../../services/UserServices';
+import { edit } from '../../services/UserServices';
 import { RootState } from '../../store/configureStore';
 import { baseURL } from '../../services/HttpServices';
 
 const Profile = () => {
     const {id} = useParams();
-    const postUrl = `http://localhost:3001/api/${id}/posts`;
+    const postUrl = `${baseURL}/api/${id}/posts`;
     const dispatch = useDispatch();
     const user = useSelector((store : RootState) => store.auth.user);
 
@@ -22,12 +22,14 @@ const Profile = () => {
         username: "", handle: "", status: "", pic:"",
         following: false
     })
+    // local state variables for profile
     const [editing, setEditing] = useState(false);
     const [username, setUsername] = useState(profile.username);
     const [handle, setHandle] = useState(profile.handle);
     const [status, setStatus] = useState(profile.status);
 
     useEffect(() => {
+        // fetch posts by current user
         fetch(`${baseURL}/api/user/${id}`)
         .then(res => res.json())
         .then(function (profile) {
@@ -41,13 +43,14 @@ const Profile = () => {
     )}, [user]);
     
     useEffect(() => {
+        // keep local states in sync
         setUsername(profile.username);
         setHandle(profile.handle);
         setStatus(profile.status);
     }, [profile]);
 
     const handleEdit = () => {
-        setEditing(!editing);
+        setEditing(!editing); // state control
     }
     
     const handleSaveChanges = async () => {
@@ -65,18 +68,20 @@ const Profile = () => {
         <>  
         {profile &&
             <>
+                {profile._id === user._id && // can only edit profile of the logged in user
                 <button className='btn btn-primary' onClick={handleEdit} style={{height: 50, width: 120}}>
                     {!editing? "Edit Profile" : "Finish Edit"}
-                </button>
+                </button>}
+
                 <SideUserHeader />
             
-                {editing &&
+                {editing && // user can edit username, handle, status
                 <div>
                     <div className='row row-cols-2'>
-                        <div>username</div>
+                        <div>Username</div>
                         <input value={username} onChange={(e) => setUsername(e.target.value)}/>
 
-                        <div>userhandle</div>
+                        <div>User Handle</div>
                         <input value={handle} onChange={(e) => setHandle(e.target.value)}/>
 
                         <div>Update Status</div>

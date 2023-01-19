@@ -1,13 +1,11 @@
 
-import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useEffect, useState } from 'react';
+import {useSelector} from 'react-redux';
 import Comment from './Comment';
 import { searchResult } from '../../styles/SearchResultStyles';
 import { RootState, IComment } from '../../store/configureStore';
-import user from '../../data/user';
 import UserHeader from '../Author/UserHeader';
 import { toastSuccess, toastWarn } from '../../services/NotificationServices';
-import { commentAdded } from '../../store/reducers/courses';
 import { ObjectId } from 'bson';
 import { postComment } from '../../services/ComposeServices';
 import { getUser } from '../../services/UserServices';
@@ -20,8 +18,8 @@ interface CommentsProps {
 const Comments = ({postId} : CommentsProps) => {
   const userId = useSelector((store : RootState) => store.auth.user._id);
   const user = getUser();
-  console.log("current user is", user._id);
 
+  // local state variables to hold existing comments and user comment in draft
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
 
@@ -29,6 +27,7 @@ const Comments = ({postId} : CommentsProps) => {
     setComment("");
   } 
 
+  // fetch comments from database using postId
   useEffect(() => {
     fetch(`${baseURL}/api/post/comments/${postId}`)
       .then(res => res.json())
@@ -40,12 +39,16 @@ const Comments = ({postId} : CommentsProps) => {
   const handleReMeh = async () => {
       if (!comment) toastWarn('Comment cannot be empty!');
       else {
+          // update comment numbers by manipulating the dom tree
           const commentButton = document.getElementById('comment-button') as HTMLElement;
           commentButton.innerHTML = (parseInt(commentButton.innerHTML) + 1).toString();
+          
           toastSuccess('Comment saved!');
+
+          // add created comment (from the server) to the client side local comments
           const newComment = await postComment(postId, user._id, comment);
           setComments([...comments, newComment] as any);
-          setComment("");
+          setComment(""); // restore text field to empty
       }
   }
 

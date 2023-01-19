@@ -4,7 +4,7 @@ import { RootState } from '../store/configureStore.js';
 import NavBar from '../components/Nav/NavBar';
 import { useEffect, useState } from 'react';
 import Follows from '../components/Follow/Follows';
-import { loadFollowing } from '../store/reducers/courses.js';
+import { loadFollowing } from '../store/reducers/posts.js';
 import { getUser } from '../services/UserServices';
 import { baseURL } from '../services/HttpServices';
 

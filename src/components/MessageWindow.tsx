@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { RootState } from '../store/configureStore';
-import { mehSet, messageTriggered } from '../store/reducers/nav';
+import { messageTriggered } from '../store/reducers/nav';
 import Modal from 'react-modal';
 import UserHeader from './Author/UserHeader';
 import ChatDetail from './Chats/ChatDetail';

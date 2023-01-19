@@ -1,10 +1,7 @@
 
-import React from 'react';
-import Detail from '../SearchResult/Detail';
 import {useSelector} from 'react-redux';
 import Tag from './Tag';
-import { searchResult } from '../../styles/SearchResultStyles';
-import { RootState, ITag } from '../../store/configureStore';
+import { RootState } from '../../store/configureStore';
 
 interface TagsProps {
     tags: string []
@@ -24,12 +21,6 @@ const Tags = ({tags}: TagsProps) => {
           ))}
         </div>
       </div>}
-{/*       
-      {current && 
-          <div className={showCart ? 'col-5' : 'col-6'}>
-            <Detail />
-          </div>
-      } */}
     </>
     
     )

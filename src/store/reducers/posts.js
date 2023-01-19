@@ -1,27 +1,16 @@
 
 import {createSlice} from '@reduxjs/toolkit';
 
-/*
-store: 
-{
-    courses: [array of search results],  // array of course objects
-    current: course currently being viewed // an course obejct
-    cart: [courses in cart], // array of course objects
-}
-
-*/
-
 const slice = createSlice({
     name: 'entities',
     initialState: {},
     reducers: {
-        // initialize courses, cart, fourYears, carts, notes, and showCart
         loadPosts: (store, action) => {
+            // initialize posts, followed, liked and saved 
             store.posts = action.payload;
             store.followed = store.followed || ['Twitter'];
             store.liked = store.liked || [];
             store.saved = store.saved || [];
-            //store.profile = store.profile || {};
         },
         loadLiked: (entities, action) => {
             entities.liked = action.payload;
@@ -32,6 +21,12 @@ const slice = createSlice({
         loadSaved: (entities, action) => {
             entities.saved = action.payload;
         },
+        loadPost: (entities, action) => {
+            entities.post = action.payload;
+        },
+        loadProfile: (entities, action) => {
+            entities.profile = action.payload;
+        },
         chatIdSet: (entities, action) => {
             entities.chatId = action.payload;
         },
@@ -41,42 +36,29 @@ const slice = createSlice({
             postsByUserFollowed.forEach(post => {
                 post.author.followed = true;
             });
-            // or keep track of an array of followed users 
         },
         postLiked: (entities, action) => {
             const [post] = entities.posts.filter(p => p._id === action.payload._id);
-            // if already liked then undo like, else add to the liked list
-            const [liked] = entities.liked.filter(l => l === action.payload._id);
-            console.log(JSON.stringify(liked));
-            if (liked) {
-                // liked array
-                entities.liked = entities.liked.filter(l => l !== action.payload._id);
-                //post.liked--;
+            /* the number of likes to be set is larger than the current number,
+             that means the user liked the post, thereby increasing its likes, vice versa*/
+            if (action.payload.likes > post.likes) {
+                entities.liked = [...entities.liked, post._id];
+            } else {
+                entities.Liked = entities.liked.filter(l => l !== post._id)
             }
-            else {
-                entities.liked = [...entities.liked, action.payload._id];
-                //post.liked++;
-                console.log(JSON.stringify(entities.liked))
-            }
+            post.likes = action.payload.likes;
         },
         postSaved: (entities, action) => {
-            // if already liked then undo like, else add to the liked list
-            const [saved] = entities.saved.filter(l => l === action.payload._id);
-            if (saved) {
-                // liked array
-                entities.saved = entities.saved.filter(l => l !== action.payload._id);
+            // similar to like
+            const [post] = entities.posts.filter(p => p._id === action.payload._id);
+            if (action.payload.saves > post.saved) {
+                entities.saved = [...entities.saved, post._id];
+            } else {
+                entities.saved = entities.saved.filter(s => s !== post._id)
             }
-            else {
-                entities.saved = [...entities.saved, action.payload._id];
-            }
+            post.saved = action.payload.saves;
         },
-        loadPost: (entities, action) => {
-            entities.post = action.payload;
-        },
-        loadProfile: (entities, action) => {
-            entities.profile = action.payload;
-        },
-        profileEdited: (entities, action) => {
+        profileEdited: (entities, action) => { 
             entities.profile.username = action.payload.username;
             entities.profile.handle = action.payload.handle;
             entities.profile.status = action.payload.status;

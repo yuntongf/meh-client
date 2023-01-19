@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from "react";
 import { toastSuccess, toastWarn } from '../../services/NotificationServices';
 import { RootState } from '../../store/configureStore';
-import { mehSet } from '../../store/reducers/nav';
+import { modalSet } from '../../store/reducers/nav';
 import { post } from '../../services/ComposeServices';
 
 const ComposeArea = () => {
-    const meh = useSelector((store : RootState) => store.nav.meh);
+    const meh = useSelector((store : RootState) => store.nav.modalOpen);
 
     const [content, setNote] = useState("");
     const [tags, setTags]: [string[], any] = useState([]);
@@ -27,7 +27,7 @@ const ComposeArea = () => {
             console.log(author);
             await post(author._id, content, tags);
             toastSuccess('Meh!');
-            dispatch(mehSet(false));
+            dispatch(modalSet(false));
         }
     }
 

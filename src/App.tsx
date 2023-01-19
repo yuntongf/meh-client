@@ -8,40 +8,34 @@ import DetailPage from './pages/DetailPage'
 import ProfilePage from './pages/ProfilePage'
 import MessagesPage from './pages/MessagesPage'
 import SavedPage from './pages/SavedPage'
-import MehWindow from './components/MehWindow'
 import FollowingPage from './pages/FollowPage'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { userLoggedIn } from './store/reducers/auth'
 import { Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import { IUser, RootState } from './store/configureStore';
+import { IUser } from './store/configureStore';
 import RegisterPage from './pages/RegisterPage';
 import jwtDecode from "jwt-decode";
-import { toastSuccess } from './services/NotificationServices';
 import { getJwt } from './services/AuthServices';
 import LikedPage from './pages/LikedPage';
+import NotFound from './pages/NotFound'
 
 
 function App() {
   const dispatch = useDispatch();
-  //const user = useSelector((store : RootState) => store.auth.user);
-
   const landingPageUrl = getJwt() ? '/home' : '/login';
 
   function prepareUser() {
-    const jwt = getJwt();
-    const loggedInUser: IUser = jwtDecode(jwt as any);
-    console.log(loggedInUser);
-    dispatch(userLoggedIn(loggedInUser));
+    const jwt = getJwt(); // json web token (jwt) contains logged in user info
+    if (jwt) {            
+      const loggedInUser: IUser = jwtDecode(jwt as any);
+      dispatch(userLoggedIn(loggedInUser));
+    }
   }
 
   useEffect(() => {
-     try {
       prepareUser();
-    } catch (ex) {
-        toastSuccess('🦄 Welcome! Please register for an account or log in.');
-    }
   }, [])
 
   return (
@@ -75,7 +69,7 @@ function App() {
         <Route
           path='/post/:id'
           element={
-                <DetailPage />
+            <DetailPage />
           }
         />
         < Route
@@ -108,15 +102,8 @@ function App() {
             <MessagesPage/>
           }
         />
-        < Route
-          path='/compose/:type'
-          element={
-            <>
-            <MainPage/>
-            <MehWindow />
-            </>
-          }
-        />
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/not-found" replace />} />
       </Routes >
     </div >
   )

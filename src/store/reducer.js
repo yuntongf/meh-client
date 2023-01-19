@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import entitiesReducer from './reducers/courses';
+import entitiesReducer from './reducers/posts';
 import navReducer from './reducers/nav';
 import authReducer from './reducers/auth';
 

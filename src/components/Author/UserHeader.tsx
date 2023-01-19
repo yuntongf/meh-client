@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { IUser } from "../../store/configureStore";
-import { userFollowed } from "../../store/reducers/courses";
-import { userLoggedIn } from "../../store/reducers/auth";
+import { userFollowed, userSet } from "../../store/reducers/posts";
 import { RootState } from '../../store/configureStore.js';
 import { useEffect, useState } from "react";
 import { ObjectId } from "bson";
@@ -16,11 +15,13 @@ interface UserHeaderProps {
 }
 
 const UserHeader = ({user_id} : UserHeaderProps) => {
-    const loggedInUser = useSelector((store : RootState) => store.auth.user);
     const dispatch = useDispatch();
-    const following = useSelector((store : RootState) => store.entities.following) || [];
-    console.log(following);
+    const loggedInUser = useSelector((store : RootState) => store.auth.user);
 
+    // see if the logged in user is a follower
+    const following = useSelector((store : RootState) => store.entities.following) || [];
+    const [followed, setFollowed] = useState(following.includes(user_id));
+    let followButtonContent = followed ? 'Following' : 'Follow';
     useEffect(() => {
         setFollowed(following.includes(user_id));
     }, [following]);
@@ -34,41 +35,40 @@ const UserHeader = ({user_id} : UserHeaderProps) => {
             status: "",
             following: false
         })
-
+    useEffect(() => {
+        getUser();
+    }, [loggedInUser]);
+    
     async function getUser() {
         const {data} = await getUserHelper(user_id);
         setUser(data);
     }
-
+    
     function getLoggedInUserId() {
         const jwt = getJwt();
         const loggedInUser = jwtDecode(jwt as any) as IUser;
         return loggedInUser._id;
     }
 
-    useEffect(() => {
-        getUser();
-    }, [loggedInUser]);
-
-    const [followed, setFollowed] = useState(following.includes(user_id));
-    let followButtonContent = followed ? 'Following' : 'Follow';
-
-    const handleAuthorDetail = () => {
-        dispatch(userLoggedIn(user));
+    const handleProfile = () => {
+        /* set entities.user to logged in user, since the SideUserHeader 
+            element in profile page takes in IUser as argument */
+        dispatch(userSet(user)); 
     }
     
+    // update both client side and server side
     const handleFollow = async () => {
         dispatch(userFollowed(user));
         setFollowed(true);
-        // update backend as well
         await follow(getLoggedInUserId(), user._id);
     }
+
     return (
         <div className="d-flex justify-content-between">
-            <Link to={`/profile/${user._id}`} className="text-decoration-none text-dark">  
-                <div className="d-flex" onClick={handleAuthorDetail}>
+            <Link to={`/profile/${user._id}`} className="text-decoration-none text-dark" onClick={handleProfile}>  
+                <div className="d-flex">
                     <img src={user.pic} />
-                    <div className="ms-3">
+                    <div className="ms-4">
                         <div className="d-flex">
                             <div className="" style={{fontSize: 28}}>{user.username}</div> <div style={{fontSize: 15}} className="ms-2 mt-2 text-secondary">@{user.handle}</div>
                         </div>

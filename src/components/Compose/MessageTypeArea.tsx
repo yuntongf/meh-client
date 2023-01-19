@@ -1,4 +1,4 @@
-import {chatSet} from '../../store/reducers/courses';
+import {chatSet} from '../../store/reducers/posts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import { toastSuccess, toastWarn } from '../../services/NotificationServices';

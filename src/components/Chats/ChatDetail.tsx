@@ -23,16 +23,16 @@ const ChatDetail = () => {
             {chat && users &&
             <div>
                 <div className="list-group-item" style={{height: 510, maxHeight: 500, overflow: 'auto'}}>
-                    {chat.messages ? 
+                    {!!chat.messages[0] ? 
                     <ul className="">
                         {chat.messages.map(message => (
                             <ChatMessage message={message} users={users}/>
                         ))}
                     </ul>
                     :
-                    <div className='d-flex justify-content-center'>
+                    <div className='d-flex justify-content-center mt-2'>
                         <div style={{fontSize:18}}>
-                            No messages between you at the moment!
+                            No chat history between you. Say hi!
                         </div>
                     </div>
                     }

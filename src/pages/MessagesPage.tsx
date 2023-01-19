@@ -3,14 +3,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'react-toastify/dist/ReactToastify.css'
 import '../App.css'
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../store/configureStore'
 import NavBar from '../components/Nav/NavBar';
 import { getUser } from '../services/UserServices';
 import Follows from '../components/Follow/Follows';
 import MessageWindow from '../components/MessageWindow';
 import { baseURL } from '../services/HttpServices';
-//const chat = chats[0];
 
 const MessagesPage = () => {
   const [chats, setChats] = useState([]);

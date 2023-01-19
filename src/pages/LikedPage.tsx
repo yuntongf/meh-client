@@ -4,17 +4,18 @@ import NavBar from "../components/Nav/NavBar"
 import Posts from "../components/SearchResult/Posts";
 import { getUser } from "../services/UserServices";
 import { RootState } from "../store/configureStore";
-import { loadPosts } from "../store/reducers/courses";
+import { loadPosts } from "../store/reducers/posts";
 import { baseURL } from '../services/HttpServices';
 
 const LikedPage = () => {
     const loggedInUser = getUser();
     const posts = useSelector((store : RootState) => store.entities.posts);
-    const meh = useSelector((store : RootState) => store.nav.meh);
+    const modalOpen = useSelector((store : RootState) => store.nav.modalOpen);
     
     const dispatch = useDispatch();
 
-    async function getPosts() {
+    async function getLikedPosts() {
+        // get liked posts from the server
         fetch(`${baseURL}/api/user/liked/posts/${loggedInUser._id}`)
         .then(res => res.json())
         .then(function (posts) {
@@ -23,9 +24,9 @@ const LikedPage = () => {
     }
 
     useEffect(() => {
-        // populate data: posts and accounts that user is followering
-        getPosts(); 
-      }, [meh]);
+        // populate data: posts that the current user has liked
+        getLikedPosts(); 
+      }, [modalOpen]);
 
     return (
         <div className="mt-5">

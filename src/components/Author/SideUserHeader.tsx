@@ -6,7 +6,7 @@ import { userLoggedIn } from "../../store/reducers/auth";
 
 const SideUserHeader = () => {
     const dispatch = useDispatch();
-    const user = useSelector((store : RootState) => store.auth.user);
+    const user = useSelector((store : RootState) => store.entities.user);
 
     const handleAuthorDetail = () => {
         dispatch(userLoggedIn(user));
@@ -20,10 +20,13 @@ const SideUserHeader = () => {
             </div>
             <div className="d-flex justify-content-center" onClick={handleAuthorDetail}>
                 <div>
-                    <div className="d-flex m-3">
-                        <h3>{user.username}</h3> <h5 className="ms-2 mt-1">@{user.handle}</h5>
+                    <div className="d-flex mt-3">
+                        <h3>{user.username}</h3> 
                     </div>
                 </div>
+            </div>
+            <div className="d-flex justify-content-center" onClick={handleAuthorDetail}>
+                <h5 className="ms-2 text-secondary" style={{fontSize:18}}>@{user.handle}</h5>
             </div>
         </Link>
         <div className="d-flex justify-content-center">

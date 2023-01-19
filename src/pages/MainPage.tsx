@@ -2,20 +2,21 @@
 
 
 import { useSelector, useDispatch } from 'react-redux';
-import { loadFollowing } from '../store/reducers/courses.js';
+import { loadFollowing } from '../store/reducers/posts.js';
 import { RootState } from '../store/configureStore.js';
 import Posts from '../components/SearchResult/Posts';
 import NavBar from '../components/Nav/NavBar';
 import { useEffect } from 'react';
-import { loadPosts } from '../store/reducers/courses.js';
+import { loadPosts } from '../store/reducers/posts.js';
 import { getUser } from '../services/UserServices';
 import { baseURL } from '../services/HttpServices';
 
 const MainPage = () => {
-    // some state control variables
     const loggedInUser = getUser();
+
+    // state control variables
     const posts = useSelector((store : RootState) => store.entities.posts);
-    const meh = useSelector((store : RootState) => store.nav.meh);
+    const modalOpen = useSelector((store : RootState) => store.nav.modalOpen);
     
     const dispatch = useDispatch();
 
@@ -26,21 +27,20 @@ const MainPage = () => {
             dispatch(loadPosts(posts));
         })
     }
-
-    function getFollowing() {
+    
+    async function getFollowing() {
         fetch(`${baseURL}/api/user/following/${loggedInUser._id.toString()}`)
         .then(res => res.json())
         .then(function (following) {
-            console.log("following", following);
             dispatch(loadFollowing(following));
         });
     }
 
     useEffect(() => {
         // populate data: posts and accounts that user is followering
-        getPosts(); 
+        getPosts();
         getFollowing();
-      }, [meh]);
+      }, [modalOpen]);
 
     return (
         <div className="mt-5">

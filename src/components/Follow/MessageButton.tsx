@@ -5,7 +5,7 @@ import { getUser } from "../../services/UserServices";
 import {chat} from "../../services/MessageServices";
 import { IUser } from "../../store/configureStore";
 import { messageTriggered } from "../../store/reducers/nav";
-import { chatIdSet, chatSet } from "../../store/reducers/courses";
+import { chatIdSet, chatSet } from "../../store/reducers/posts";
 
 interface MessageButtonProps {
     userId: ObjectId

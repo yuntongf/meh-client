@@ -4,6 +4,8 @@ import Stats from './Stats';
 import { Link } from 'react-router-dom';
 import UserHeader from '../Author/UserHeader';
 
+const contentStyle = {fontSize:22};
+
 interface PostInterface {
     post: IPost
 }
@@ -11,13 +13,13 @@ interface PostInterface {
 const Post = ({post} : PostInterface) => {
 
     return (
-        <div className="card mb-3 p-4">
+        <div className="card mb-3 p-4" key={post._id.toString()}>
             {post &&
-                <div key={post._id.toString()} >
+                <div >
                     <UserHeader user_id={post.author}/>
                     <Link className="text-decoration-none text-dark" to={`/post/${post._id}`} >
                         <div className="ms-5 ps-5 mb-5" >
-                            <p style={{fontSize:22}}>
+                            <p style={contentStyle}>
                             {post.content}
                             </p>
                             <small>click to view detail</small>

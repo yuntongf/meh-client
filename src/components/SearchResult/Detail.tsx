@@ -3,7 +3,7 @@ import { descriptionWrapper, detailWrapper } from "../../styles/DetailStyles";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/configureStore";
 import Comments from "../Detail/Comments";
-import { loadPost } from "../../store/reducers/courses";
+import { loadPost } from "../../store/reducers/posts";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
 import { baseURL } from '../../services/HttpServices';

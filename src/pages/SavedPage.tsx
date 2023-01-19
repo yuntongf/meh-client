@@ -2,30 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../components/Nav/NavBar"
 import Posts from "../components/SearchResult/Posts";
-import { getUser } from "../services/UserServices";
 import { RootState } from "../store/configureStore";
-import { loadPosts } from "../store/reducers/courses";
-import { baseURL } from '../services/HttpServices';
+import { loadPosts } from "../store/reducers/posts";
 
 const SavedPage = () => {
-    const loggedInUser = getUser();
     const posts = useSelector((store : RootState) => store.entities.posts);
-    const meh = useSelector((store : RootState) => store.nav.meh);
     
-    const dispatch = useDispatch();
-
-    async function getPosts() {
-        fetch(`${baseURL}/api/user/saved/posts/${loggedInUser._id}`)
-        .then(res => res.json())
-        .then(function (posts) {
-            dispatch(loadPosts(posts));
-        })
-    }
-
     useEffect(() => {
-        // populate data: posts and accounts that user is followering
-        getPosts(); 
-      }, [meh]);
+        loadPosts(posts);
+    }, [posts])
 
     return (
         <div className="mt-5">
