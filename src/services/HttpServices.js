@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 //axios.defaults.headers.common['x-token'] = localStorage.getItem("token");
-axios.defaults.baseURL = "";
+axios.defaults.baseURL = "http://localhost:3001";
 
 axios.interceptors.response.use(null, (e) => {
   const expectedError =
