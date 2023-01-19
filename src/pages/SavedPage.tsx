@@ -5,7 +5,7 @@ import Posts from "../components/SearchResult/Posts";
 import { getUser } from "../services/UserServices";
 import { RootState } from "../store/configureStore";
 import { loadPosts } from "../store/reducers/courses";
-
+import { baseURL } from '../services/HttpServices';
 
 const SavedPage = () => {
     const loggedInUser = getUser();
@@ -15,7 +15,7 @@ const SavedPage = () => {
     const dispatch = useDispatch();
 
     async function getPosts() {
-        fetch(`http://localhost:3001/api/user/saved/posts/${loggedInUser._id}`)
+        fetch(`${baseURL}/api/user/saved/posts/${loggedInUser._id}`)
         .then(res => res.json())
         .then(function (posts) {
             dispatch(loadPosts(posts));

@@ -11,28 +11,26 @@ import { commentAdded } from '../../store/reducers/courses';
 import { ObjectId } from 'bson';
 import { postComment } from '../../services/ComposeServices';
 import { getUser } from '../../services/UserServices';
+import { baseURL } from '../../services/HttpServices';
 
 interface CommentsProps {
     postId: ObjectId
 }
 
 const Comments = ({postId} : CommentsProps) => {
-  const dispatch = useDispatch();
   const userId = useSelector((store : RootState) => store.auth.user._id);
   const user = getUser();
   console.log("current user is", user._id);
 
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-  const [commentSent, setCommentSent] = useState(false);
-  
 
   const handleTrash = () => {
     setComment("");
   } 
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/post/comments/${postId}`)
+    fetch(`${baseURL}/api/post/comments/${postId}`)
       .then(res => res.json())
       .then(function (comments) {
           setComments(comments);

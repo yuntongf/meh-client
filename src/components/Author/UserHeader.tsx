@@ -5,7 +5,6 @@ import { userFollowed } from "../../store/reducers/courses";
 import { userLoggedIn } from "../../store/reducers/auth";
 import { RootState } from '../../store/configureStore.js';
 import { useEffect, useState } from "react";
-import { toastSuccess } from "../../services/NotificationServices";
 import { ObjectId } from "bson";
 import { getUserHelper } from "../../services/UserServices";
 import { getJwt } from "../../services/AuthServices";
@@ -37,9 +36,7 @@ const UserHeader = ({user_id} : UserHeaderProps) => {
         })
 
     async function getUser() {
-        console.log(user_id.toString())
         const {data} = await getUserHelper(user_id);
-        console.log(data);
         setUser(data);
     }
 
@@ -73,7 +70,7 @@ const UserHeader = ({user_id} : UserHeaderProps) => {
                     <img src={user.pic} />
                     <div className="ms-3">
                         <div className="d-flex">
-                            <div className="" style={{fontSize: 25}}>{user.username}</div> <div style={{fontSize: 15}} className="ms-2 mt-2 text-secondary">@{user.handle}</div>
+                            <div className="" style={{fontSize: 28}}>{user.username}</div> <div style={{fontSize: 15}} className="ms-2 mt-2 text-secondary">@{user.handle}</div>
                         </div>
                         <p style={{fontSize: 15}}>{user.status}</p>
                     </div>

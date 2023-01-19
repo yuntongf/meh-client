@@ -9,6 +9,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ObjectId } from 'bson';
 import { edit, getUser } from '../../services/UserServices';
 import { RootState } from '../../store/configureStore';
+import { baseURL } from '../../services/HttpServices';
 
 const Profile = () => {
     const {id} = useParams();
@@ -27,15 +28,13 @@ const Profile = () => {
     const [status, setStatus] = useState(profile.status);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/user/${id}`)
+        fetch(`${baseURL}/api/user/${id}`)
         .then(res => res.json())
         .then(function (profile) {
             setProfile(profile);
             fetch(postUrl)
             .then(res => res.json())
             .then(function (posts) {
-                toastSuccess('yaaa');
-                console.log(user);
                 dispatch(loadPosts(posts));
             })
         }

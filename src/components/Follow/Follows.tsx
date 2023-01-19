@@ -1,13 +1,7 @@
 
-import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { searchResult } from '../../styles/SearchResultStyles';
-import { RootState, IComment } from '../../store/configureStore';
-import user from '../../data/user';
-import UserHeader from '../Author/UserHeader';
-import { toastSuccess, toastWarn } from '../../services/NotificationServices';
 import Follow from './Follow';
-import { IUser } from '../../store/configureStore';
 import { ObjectId } from 'bson';
 
 interface FollowsProps {
@@ -15,7 +9,6 @@ interface FollowsProps {
 }
 
 const Follows = ({follows} : FollowsProps) => {
-  const dispatch = useDispatch();
 
   return (
     <>{follows[0] ?

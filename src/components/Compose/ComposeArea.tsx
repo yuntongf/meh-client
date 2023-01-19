@@ -13,19 +13,6 @@ const ComposeArea = () => {
     const [tags, setTags]: [string[], any] = useState([]);
     const [newTag, setNewTag] = useState("");
 
-    const modalStyle = {
-        content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "white",
-            width: 600,
-            height: 500
-          },
-    }
     const dispatch = useDispatch();
     const author = useSelector((store : RootState) => store.auth.user);
 
@@ -51,7 +38,7 @@ const ComposeArea = () => {
     }
 
     return (
-            <div className="">
+            <div className="mt-4">
                 <div className="">
                     <textarea name='content' className='form-control' placeholder='Meh!' value={content} onChange={e => setNote(e.currentTarget.value)} rows={10} />
                 </div>

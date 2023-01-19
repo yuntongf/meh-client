@@ -6,6 +6,7 @@ import Comments from "../Detail/Comments";
 import { loadPost } from "../../store/reducers/courses";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
+import { baseURL } from '../../services/HttpServices';
 
 const Detail = () => {
    const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Detail = () => {
    const {id} = useParams();
 
    useEffect(() => {
-      fetch(`http://localhost:3001/api/post/${id}`)
+      fetch(`${baseURL}/api/post/${id}`)
         .then(res => res.json())
         .then(function (post) {
             dispatch(loadPost(post));

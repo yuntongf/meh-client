@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Follows from '../components/Follow/Follows';
 import { loadFollowing } from '../store/reducers/courses.js';
 import { getUser } from '../services/UserServices';
+import { baseURL } from '../services/HttpServices';
 
 const FollowingPage = () => {
     const following = useSelector((store : RootState) => store.entities.following);
@@ -14,7 +15,7 @@ const FollowingPage = () => {
     const dispatch = useDispatch();
 
     function getFollowing() {
-        fetch(`http://localhost:3001/api/user/following/${loggedInUser._id.toString()}`)
+        fetch(`${baseURL}/api/user/following/${loggedInUser._id.toString()}`)
         .then(res => res.json())
         .then(function (following) {
             console.log("following", following);

@@ -11,13 +11,13 @@ interface PostInterface {
 const Post = ({post} : PostInterface) => {
 
     return (
-        <div className="card mb-3 p-3">
+        <div className="card mb-3 p-4">
             {post &&
                 <div key={post._id.toString()} >
                     <UserHeader user_id={post.author}/>
                     <Link className="text-decoration-none text-dark" to={`/post/${post._id}`} >
                         <div className="ms-5 ps-5 mb-5" >
-                            <p style={{fontSize:26}}>
+                            <p style={{fontSize:22}}>
                             {post.content}
                             </p>
                             <small>click to view detail</small>

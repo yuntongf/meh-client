@@ -5,7 +5,7 @@ import Post from './Post';
 import { RootState, IPost } from '../../store/configureStore';
 import { loadLiked, loadPosts, loadSaved } from '../../store/reducers/courses';
 import { getUser } from '../../services/UserServices';
-
+import { baseURL } from '../../services/HttpServices';
 
 const Posts = () => {
 
@@ -16,7 +16,7 @@ const Posts = () => {
   console.log("posts", posts);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/user/liked/${user._id.toString()}`)
+    fetch(`${baseURL}/api/user/liked/${user._id.toString()}`)
     .then(res => res.json())
     .then(function (liked) {
       console.log(liked);
@@ -26,7 +26,7 @@ const Posts = () => {
 }, [])
 
 useEffect(() => {
-  fetch(`http://localhost:3001/api/user/saved/${user._id.toString()}`)
+  fetch(`${baseURL}/api/user/saved/${user._id.toString()}`)
   .then(res => res.json())
   .then(function (saved) {
     dispatch(loadSaved(saved));

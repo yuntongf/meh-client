@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-//axios.defaults.headers.common['x-token'] = localStorage.getItem("token");
-axios.defaults.baseURL = "http://localhost:3001";
+export const baseURL = "https://meh-server.herokuapp.com";
+axios.defaults.baseURL = baseURL;
 
 axios.interceptors.response.use(null, (e) => {
   const expectedError =

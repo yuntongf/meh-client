@@ -8,8 +8,8 @@ import Posts from '../components/SearchResult/Posts';
 import NavBar from '../components/Nav/NavBar';
 import { useEffect } from 'react';
 import { loadPosts } from '../store/reducers/courses.js';
-import { toastSuccess } from '../services/NotificationServices';
 import { getUser } from '../services/UserServices';
+import { baseURL } from '../services/HttpServices';
 
 const MainPage = () => {
     // some state control variables
@@ -20,7 +20,7 @@ const MainPage = () => {
     const dispatch = useDispatch();
 
     async function getPosts() {
-        fetch(`http://localhost:3001/api/posts`)
+        fetch(`${baseURL}/api/posts`)
         .then(res => res.json())
         .then(function (posts) {
             dispatch(loadPosts(posts));
@@ -28,7 +28,7 @@ const MainPage = () => {
     }
 
     function getFollowing() {
-        fetch(`http://localhost:3001/api/user/following/${loggedInUser._id.toString()}`)
+        fetch(`${baseURL}/api/user/following/${loggedInUser._id.toString()}`)
         .then(res => res.json())
         .then(function (following) {
             console.log("following", following);

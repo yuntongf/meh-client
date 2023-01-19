@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "../../store/configureStore";
 import UserHeader from "./UserHeader";
 import { RootState } from '../../store/configureStore';
-import { toastSuccess } from "../../services/NotificationServices";
 import { loadPosts } from "../../store/reducers/courses";
 import posts from "../../data/posts";
 import Posts from "../SearchResult/Posts";
@@ -19,7 +18,6 @@ const UserWindow = () => {
         .then(res => res.json())
         .then(function (posts) {
         dispatch(loadPosts(posts));
-        toastSuccess('reload');
         })
       }, [user]);
 

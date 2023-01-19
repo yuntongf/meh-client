@@ -13,9 +13,7 @@ interface MessageTypeAreaProps {
 }
 
 const MessageTypeArea = ({chat_id} : MessageTypeAreaProps) => {
-    const meh = useSelector((store : RootState) => store.nav.meh);
     const user = getUser();
-    const chatId = useSelector((store : RootState) => store.entities.chatId);
     const [note, setNote] = useState("");
     const dispatch = useDispatch();
 

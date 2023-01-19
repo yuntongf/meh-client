@@ -5,12 +5,11 @@ import '../App.css'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/configureStore'
-import BackButton from '../components/Detail/BackButton'
 import NavBar from '../components/Nav/NavBar';
 import { getUser } from '../services/UserServices';
 import Follows from '../components/Follow/Follows';
 import MessageWindow from '../components/MessageWindow';
-
+import { baseURL } from '../services/HttpServices';
 //const chat = chats[0];
 
 const MessagesPage = () => {
@@ -20,7 +19,7 @@ const MessagesPage = () => {
   const following = useSelector((store : RootState) => store.entities.following);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/chats/${user._id}`)
+    fetch(`${baseURL}/api/chats/${user._id}`)
     .then(res => res.json())
     .then(function (chats) {
       console.log("chats are", JSON.stringify(chats));

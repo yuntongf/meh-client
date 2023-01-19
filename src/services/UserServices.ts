@@ -24,11 +24,11 @@ export function getUser() : IUser {
 }
 
 export function getUserHelper(userId: ObjectId) {
-    return http.get(`http://localhost:3001/api/user/${userId}`);
+    return http.get(`/api/user/${userId}`);
   }
 
 export async function edit(userId: ObjectId, username: String, handle: String, status: String) {
-    const res = await http.post("http://localhost:3001/api/profile/edit", {userId, username, handle, status});
+    const res = await http.post("/api/profile/edit", {userId, username, handle, status});
     localStorage.setItem("token", res.headers['x-token']);
     return getUser();
  }
