@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 // https://meh-server.herokuapp.com
-export const baseURL = "http://localhost:3001";
+export const baseURL = "https://meh-server.herokuapp.com";
 
 axios.defaults.baseURL = baseURL;
 

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { IArticle, RootState } from "../../store/configureStore";
 
 interface ArticleProps {
