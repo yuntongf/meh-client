@@ -22,7 +22,6 @@ export const modalStyle = {
 }
 const MehWindow = () => {
     
-    //const course = useSelector((store : RootState) => store.entities.current);
     const modalOpen = useSelector((store : RootState) => store.nav.modalOpen);
     const user = getUser();
     let [note, setNote] = useState("");
