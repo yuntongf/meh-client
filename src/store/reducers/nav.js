@@ -9,6 +9,9 @@ const slice = createSlice({
         },
         messageTriggered: (nav, action) => {
             nav.messaging = !nav.messaging;
+        },
+        detailModalSet: (nav, action) => {
+            nav.detailModalPost = action.payload;
         }
     }
     
@@ -16,6 +19,7 @@ const slice = createSlice({
 
 export const {
     messageTriggered,
-    modalSet
+    modalSet,
+    detailModalSet
 } = slice.actions;
 export default slice.reducer;

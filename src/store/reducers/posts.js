@@ -6,9 +6,9 @@ const slice = createSlice({
     initialState: {},
     reducers: {
         loadPosts: (store, action) => {
-            // initialize posts, followed, liked and saved 
+            // initialize posts, following, liked and saved 
             store.posts = action.payload;
-            store.followed = store.followed || ['Twitter'];
+            store.following = store.following || [];
             store.liked = store.liked || [];
             store.saved = store.saved || [];
         },
@@ -30,12 +30,13 @@ const slice = createSlice({
         chatIdSet: (entities, action) => {
             entities.chatId = action.payload;
         },
-        userFollowed: (store, action) => {
+        userFollowed: (entities, action) => {
             const userFollowed = action.payload;
-            const postsByUserFollowed = store.posts.filter(p => p.author._id === userFollowed._id);
-            postsByUserFollowed.forEach(post => {
-                post.author.followed = true;
-            });
+            entities.following = [...entities.following, userFollowed];
+        },
+        userUnfollowed: (entities, action) => {
+            const userUnfollowed = action.payload;
+            entities.following = entities.following.filter(f => f !== userUnfollowed)
         },
         postLiked: (entities, action) => {
             const [post] = entities.posts.filter(p => p._id === action.payload._id);
@@ -85,6 +86,7 @@ export const {
     chatIdSet,
     commentAdded,
     userFollowed,
+    userUnfollowed,
     postLiked,
     postSaved,
     userSet,

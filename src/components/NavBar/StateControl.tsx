@@ -1,5 +1,4 @@
 import { TypedUseSelectorHook, useSelector, useDispatch} from 'react-redux';
-import { navButtonOn, navButtonOff } from '../../styles/NavStyles';
 import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch } from '../../store/configureStore';
 import { RootState } from '../../store/configureStore';
@@ -11,7 +10,6 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const StateControl = () => {
     
-    const onCheckoutPage = useSelector((store : RootState) => store.nav.onCheckoutPage);
     const user = useSelector((store : RootState) => store.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -41,14 +39,6 @@ const StateControl = () => {
                     </button>
                 </Link> 
             </>}
-
-            {onCheckoutPage &&
-                <Link to='/'>
-                    <button style={navButtonOn} 
-                            className='m-2 btn btn-outline-secondary'>
-                        Back
-                    </button>
-                </Link>}
       </div>
     )
 }

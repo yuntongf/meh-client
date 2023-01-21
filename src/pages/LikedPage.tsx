@@ -6,6 +6,8 @@ import { getUser } from "../services/UserServices";
 import { RootState } from "../store/configureStore";
 import { loadPosts } from "../store/reducers/posts";
 import { baseURL } from '../services/HttpServices';
+import News from "../store/reducers/news";
+import Articles from "../components/News/Articles";
 
 const LikedPage = () => {
     const loggedInUser = getUser();
@@ -29,12 +31,13 @@ const LikedPage = () => {
       }, [modalOpen]);
 
     return (
-        <div className="mt-5">
-            <div className='d-flex justify-content-center'>
+        <div>
+            <div className='d-flex'>
                 <NavBar/>
-                <div className='col-5 ps-4' style={{maxHeight: 700, overflow: 'auto' }}>
+                <div className='col-6 ps-4' style={{maxHeight: 700, overflow: 'auto' }}>
                     {posts && <Posts />}
                 </div>
+                <Articles/>
             </div>
         </div>
     )

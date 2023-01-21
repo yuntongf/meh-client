@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { descriptionWrapper, detailWrapper } from "../../styles/DetailStyles";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/configureStore";
 import Comments from "../Detail/Comments";
 import { loadPost } from "../../store/reducers/posts";
-import { useParams } from "react-router-dom";
 import Post from "./Post";
 import { baseURL } from '../../services/HttpServices';
 
 const Detail = () => {
    const dispatch = useDispatch();
    const post = useSelector((store : RootState) => store.entities.post);
-   const {id} = useParams();
+   const postId = useSelector((store : RootState) => store.nav.detailModalPost);
 
    useEffect(() => {
-      fetch(`${baseURL}/api/post/${id}`)
+      fetch(`${baseURL}/api/post/${postId}`)
         .then(res => res.json())
         .then(function (post) {
             dispatch(loadPost(post));
@@ -23,8 +21,8 @@ const Detail = () => {
     
     
    return (
-      <div className='' style={detailWrapper}> 
-      {post &&
+      <div> 
+         {post &&
          <div>
             <Post post={post}/>
             <Comments postId={post._id}/>

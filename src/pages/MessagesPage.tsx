@@ -27,9 +27,9 @@ const MessagesPage = () => {
 
    return (
         <>
-            <div className='d-flex justify-content-center mt-5'>  
+            <div className="d-flex">  
                 <NavBar />
-                <div className='col-5 ps-4' style={{maxHeight: 700, overflow: 'auto' }}>
+                <div className='col-6 ps-4' style={{maxHeight: 750, overflow: 'auto' }}>
                     <div className=''>
                         <Follows follows={following}/>
                     </div>

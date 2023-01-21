@@ -8,9 +8,9 @@ import Profile from '../components/Profile/Profile'
 const ProfilePage = () => {
    return (
         <>  
-            <div className="d-flex justify-content-center mt-5">
+            <div className="d-flex">
                 <NavBar/>
-                <div className='col-5 ps-4'>
+                <div className='col-6 ps-4'>
                     <Profile/>
                 </div>
             </div>

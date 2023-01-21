@@ -7,6 +7,19 @@ import UserHeader from './Author/UserHeader';
 import ComposeArea from './Compose/ComposeArea';
 import { getUser } from '../services/UserServices';
 
+export const modalStyle = {
+    content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor: "white",
+        width: 600,
+        height: 500
+      },
+}
 const MehWindow = () => {
     
     //const course = useSelector((store : RootState) => store.entities.current);
@@ -14,19 +27,6 @@ const MehWindow = () => {
     const user = getUser();
     let [note, setNote] = useState("");
     
-    const modalStyle = {
-        content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "white",
-            width: 600,
-            height: 500
-          },
-    }
     const dispatch = useDispatch();
 
     const handleCloseModal = () => {

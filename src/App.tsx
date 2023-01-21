@@ -9,7 +9,6 @@ import ProfilePage from './pages/ProfilePage'
 import MessagesPage from './pages/MessagesPage'
 import SavedPage from './pages/SavedPage'
 import FollowingPage from './pages/FollowPage'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { userLoggedIn } from './store/reducers/auth'
 import { Navigate } from 'react-router-dom';
@@ -20,6 +19,8 @@ import jwtDecode from "jwt-decode";
 import { getJwt } from './services/AuthServices';
 import LikedPage from './pages/LikedPage';
 import NotFound from './pages/NotFound'
+import { loadNews } from './store/reducers/news'
+import { useEffect } from 'react'
 
 
 function App() {
@@ -34,8 +35,16 @@ function App() {
     }
   }
 
+
   useEffect(() => {
       prepareUser();
+      // fetch news from NewsData.io api
+      fetch('https://newsdata.io/api/1/news?apikey=pub_15907d2038138d29b418b9254a3061b7f5cb5&q=new')
+      .then(res => res.json())
+      .then(({results}) => {
+          console.log(results);
+          dispatch(loadNews(results));
+      });
   }, [])
 
   return (

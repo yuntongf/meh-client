@@ -6,6 +6,7 @@ import { RootState, IPost } from '../../store/configureStore';
 import { loadLiked, loadPosts, loadSaved } from '../../store/reducers/posts';
 import { getUser } from '../../services/UserServices';
 import { baseURL } from '../../services/HttpServices';
+import DetailPage from '../../pages/DetailPage';
 
 const noPostPromptStyle = {fontSize:18};
 
@@ -38,11 +39,14 @@ const Posts = () => {
   return (
       <div>
       {posts[0] ? // loop through all posts
-        <ul className="list-group" >
+      <div>
+        <DetailPage/>
+        <ul className="list-group pe-5 pb-5" >
           {posts.map((post : IPost) => (
             <Post post={post}/>
           ))}
         </ul> 
+        </div>
         :
         <div className='d-flex justify-content-center'>
           <div style={noPostPromptStyle}>

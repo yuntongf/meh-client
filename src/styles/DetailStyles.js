@@ -1,6 +1,4 @@
-export const detailWrapper = {
-    
-};
+
 
 export const descriptionWrapper = { 
     border: '1px solid rgba(0, 0, 0, 0.1)',

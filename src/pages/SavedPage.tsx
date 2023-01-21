@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../components/Nav/NavBar"
+import Articles from "../components/News/Articles";
 import Posts from "../components/SearchResult/Posts";
 import { RootState } from "../store/configureStore";
 import { loadPosts } from "../store/reducers/posts";
@@ -13,12 +14,13 @@ const SavedPage = () => {
     }, [posts])
 
     return (
-        <div className="mt-5">
-            <div className='d-flex justify-content-center'>
+        <div>
+            <div className='d-flex'>
                 <NavBar/>
-                <div className='col-5 ps-4' style={{maxHeight: 700, overflow: 'auto' }}>
+                <div className='col-6 ps-4' style={{maxHeight: 700, overflow: 'auto' }}>
                     {posts && <Posts />}
                 </div>
+                <Articles/>
             </div>
         </div>
     )

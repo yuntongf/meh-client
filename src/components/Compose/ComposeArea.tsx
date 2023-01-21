@@ -48,9 +48,9 @@ const ComposeArea = () => {
                         {tags.map(tag => (
                             <>
                             {tag && 
-                            <div className='btn btn-sm btn-outline-primary me-2'>
-                                {tag}
-                            </div>}
+                                <div className='btn btn-sm btn-outline-primary me-2'>
+                                    {tag}
+                                </div>}
                             </>
                         ))}
                         <input style={{width: 50}} value={newTag} onChange={(e) => setNewTag(e.target.value)}/>

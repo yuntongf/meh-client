@@ -1,1 +1,1 @@
-export const searchResult = { maxHeight: 800, overflow: 'auto' };
+export const searchResult = { maxHeight: 800, overflow: 'auto'};

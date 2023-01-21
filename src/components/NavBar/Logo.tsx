@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
-import { useDispatch} from 'react-redux';
 import { getJwt } from "../../services/AuthServices";
 
 const Logo = () => {
-    const logo = "Meh";
+    const logo = "Meh ~";
     const redirectUrl = getJwt() ? '/home' : '/login';
 
     return (
         <Link to={redirectUrl}>
             <label>
-                <h2 className="m-2">
+                <h1 className="m-2 ms-3">
                     {logo} 
-                </h2>
+                </h1>
             </label>
         </Link>
     )

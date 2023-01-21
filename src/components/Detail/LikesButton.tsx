@@ -46,7 +46,7 @@ const LikesButton = ({post} : LikesButtonProps) => {
     return (
         <div>  
             <Link className="text-decoration-none text-dark" to="" >
-                <button className={`btn col ${!!likeClicked && 'text-warning'}`} onClick={handleLike}>
+                <button className={`btn col ${!!likeClicked && 'text-danger'}`} onClick={handleLike}>
                     {likeClicked ? '♥' : '♡'} {postInStore.likes}
                 </button>
             </Link>

@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import {useSelector} from 'react-redux';
 import Comment from './Comment';
-import { searchResult } from '../../styles/SearchResultStyles';
 import { RootState, IComment } from '../../store/configureStore';
 import UserHeader from '../Author/UserHeader';
 import { toastSuccess, toastWarn } from '../../services/NotificationServices';
@@ -56,7 +55,7 @@ const Comments = ({postId} : CommentsProps) => {
     <>{comments &&
       <div className="mt-3">
         <h4 className='mb-3'>Comments:</h4>
-        <ul className="list-group" style={searchResult}>
+        <ul className="list-group">
           {comments.map((comment : IComment) => (
             <Comment comment={comment}/>
           ))}

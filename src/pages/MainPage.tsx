@@ -1,6 +1,4 @@
 
-
-
 import { useSelector, useDispatch } from 'react-redux';
 import { loadFollowing } from '../store/reducers/posts.js';
 import { RootState } from '../store/configureStore.js';
@@ -10,6 +8,9 @@ import { useEffect } from 'react';
 import { loadPosts } from '../store/reducers/posts.js';
 import { getUser } from '../services/UserServices';
 import { baseURL } from '../services/HttpServices';
+import Articles from '../components/News/Articles';
+
+export const postsSectionStyle = {maxHeight: 750, overflow: 'auto'};
 
 const MainPage = () => {
     const loggedInUser = getUser();
@@ -43,12 +44,13 @@ const MainPage = () => {
       }, [modalOpen]);
 
     return (
-        <div className="mt-5">
-            <div className='d-flex justify-content-center'>
+        <div>
+            <div className='d-flex'>
                 <NavBar/>
-                <div className='col-5 ps-4' style={{maxHeight: 700, overflow: 'auto' }}>
+                <div className='col-6 ps-4' style={postsSectionStyle}>
                     {posts && <Posts />}
                 </div>
+                <Articles/>
             </div>
         </div>
     )
