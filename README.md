@@ -3,7 +3,7 @@
 Please go to www.mehssage.us to view the project.
 
 ## Tools and file structure
-The frontend for this Twitter replica is built with React and Redux in TypeScript. The files are mostly organized based on their purpose. 
+The frontend is built with React and Redux in TypeScript. The files are mostly organized based on their purpose. 
 
 In particular, the Services folder mostly contains helper functions that are called by the frontend to access data from the server.
 
